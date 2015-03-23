@@ -8,13 +8,24 @@ Format:
 Made By: Mayank Vachher
 """
 
-from sqlalchemy import create_engine
+from sqlalchemy import *
 from pandas import DataFrame
 
 def create_sqlite(table):
 	engine = create_engine('sqlite:///pandastable.sqlite')
+	metaData = MetaData()
+	pandasTable = Table('PandasTable', metadata,
+		Column('id', Integer, primary_key = True),
+       		Column('ELEM', String(8), nullable = False),
+       		Column('index(J)', Integer, nullable = False),
+       		Column('E(cm-1)', Float, nullable = False),
+       		Column('J', Float, nullable = False),
+       		Column('label', String(10), nullable = False),
+       		Column('gLande', Float, nullable = False)
+       	)
+       	metaData.create_all(engine)
 	myConnection = engine.raw_connection()
-	table.to_sql(name='pandastable', con=myConnection, if_exists='replace', index=True)
+	table.to_sql(name='PandasTable', con=myConnection, if_exists='replace', index=True)
 	myConnection.close()
 	
 if(__name__ == "__main__"):
