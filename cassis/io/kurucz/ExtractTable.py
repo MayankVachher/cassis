@@ -13,9 +13,10 @@ Made By: Mayank Vachher
 from pandas import read_fwf
 
 def extract_table(fileLoc):
-	tableHeaders = ['ELEM','index(J)','E(cm-1)','J','label',"gLande"]
+	tableHeaders = ['ELEM','index(J)','E(cm-1)','J','label','gLande']
 	colwidths = [(0,8),(10,13),(13,26),(27,30),(30,42),(43,48)]
-	return read_fwf(fileLoc, skiprows=38, names=tableHeaders,colspecs=colwidths,nrows=1802-38)
+	datatypes={'ELEM': object, 'index(J)': int, 'E(cm-1)': float, 'J': float, 'label': object, 'gLande': float}
+	return read_fwf(fileLoc, skiprows=38, names=tableHeaders,colspecs=colwidths,nrows=1802-38,dtype=datatypes)
 	
 if(__name__ == "__main__"):
 	print "Call function only from MainDataset File!"
