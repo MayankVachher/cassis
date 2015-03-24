@@ -14,7 +14,7 @@ from pandas import DataFrame
 def create_sqlite(table):
 	engine = create_engine('sqlite:///pandastable.sqlite')
 	metaData = MetaData()
-	pandasTable = Table('PandasTable', metadata,
+	pandasTable = Table('PandasTable', metaData,
 		Column('id', Integer, primary_key = True),
        		Column('ELEM', String(8), nullable = False),
        		Column('index(J)', Integer, nullable = False),
